@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#edf5fb" />
+  <meta name="description" content="復健之路｜有我們與您同行：陪伴家屬一步步熟悉住院及復健生活。" />
+  <title>復健之路｜有我們與您同行</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="topline"><span class="brand-mark">✦</span> 復健之路 <span class="topline-divider">｜</span> 有我們與您同行 <span class="demo-tag">測試原型</span></div>
+  <main class="shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">REHABILITATION JOURNEY · FAMILY GUIDE</div>
+        <h1>這條復健之路，<br /><em>我們陪您一起走。</em></h1>
+        <p>從入院第一天開始，陪您逐步了解住院生活、復健安排與安全照護。<br class="desktop" />同一位病人的家屬共用一份 Checklist。</p>
+      </div>
+      <div class="hero-art" aria-hidden="true"><div class="sun"></div><div class="path p1"></div><div class="path p2"></div><div class="path p3"></div><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div>
+    </header>
+
+    <section class="demo-banner" aria-live="polite">
+      <span class="demo-circle">i</span>
+      <div><strong>目前是模擬個案 DEMO-001。</strong> 所有輸入請使用測試資料，勿填寫病人姓名、病歷號、病況或其他個資。<span id="mode-note">此網站的操作紀錄僅保存在目前裝置，不會寫入 Google 試算表。</span></div>
+    </section>
+    <a id="gas-entry" class="connected-entry hidden" target="_blank" rel="noopener noreferrer">開啟已連接試算表的測試填寫入口 ↗ <span>由 Google Apps Script 將測試資料寫入私有試算表</span></a>
+
+    <section class="patient-bar" aria-label="目前個案與功能選擇">
+      <div><span class="small-muted">共同照護清單</span><strong>模擬家庭 <span class="light-code">DEMO-001</span></strong></div>
+      <div class="role-switch" role="tablist" aria-label="選擇使用者介面">
+        <button type="button" class="role-tab active" role="tab" aria-selected="true" id="family-tab" data-role="family">家屬端</button>
+        <button type="button" class="role-tab" role="tab" aria-selected="false" id="nurse-tab" data-role="nurse">護理師端 <span class="trial">預覽</span></button>
+      </div>
+    </section>
+
+    <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
+
+    <section id="family-view">
+      <div class="section-intro">
+        <div><div class="eyebrow blue">STEP 01 / 入院初期</div><h2>先熟悉住院生活</h2><p>每完成一項，就離安心照護更近一步。不清楚的部分可以選擇「需要協助」。</p></div>
+        <div class="progress-card"><div class="progress-numbers"><strong id="progress-count">0</strong><span>/ 8 項已了解</span></div><div class="progress-track"><div id="progress-fill"></div></div><small>家屬共同進度</small></div>
+      </div>
+      <div id="module-grid" class="module-grid"></div>
+      <div class="next-section"><span>接下來</span><h3>STEP 02　住院期間</h3><p>將陸續加入復健進展、照護技能與出院準備，內容由單位護理團隊一起討論後上線。</p></div>
+    </section>
+
+    <section id="nurse-view" class="hidden">
+      <div class="section-intro"><div><div class="eyebrow blue">NURSING TEAM / 護理師端</div><h2>照護準備追蹤</h2><p>查看家屬共用清單的完成情形、待協助事項與衛教觀看紀錄。</p></div><div class="progress-card"><strong class="nurse-heading">一個個案，一份進度</strong><p>照護溝通更有連續性</p></div></div>
+      <div id="nurse-guard" class="nurse-guard hidden"><label for="nurse-key">護理師測試通行碼</label><div class="inline-form"><input id="nurse-key" type="password" autocomplete="off" placeholder="測試通行碼" /><button id="nurse-unlock" class="primary-btn">進入</button></div><p>此功能僅供原型測試。正式版須接入院方核准的身分驗證與授權制度。</p></div>
+      <div id="nurse-dashboard">
+        <div id="nurse-stats" class="stat-grid"></div>
+        <div class="panel"><div class="panel-heading"><h3>共同 Checklist 進度</h3><span>最後更新優先呈現</span></div><div id="nurse-checklist" class="nurse-list"></div></div>
+        <div class="two-col"><div class="panel"><div class="panel-heading"><h3>家屬疑問與回覆</h3></div><div id="nurse-questions"></div></div><div class="panel"><div class="panel-heading"><h3>衛教影片觀看紀錄</h3></div><div id="nurse-videos"></div></div></div>
+      </div>
+    </section>
+
+    <footer>復健之路｜有我們與您同行 <span>·</span> 這是內容與流程原型，不能取代醫療團隊的個別評估與院內正式規範。</footer>
+  </main>
+
+  <dialog id="video-dialog" class="app-dialog">
+    <form id="video-form"><button type="button" class="dialog-close" aria-label="關閉" data-close-dialog="video-dialog">×</button><div class="eyebrow blue">衛教影片觀看登記</div><h3>請先留下觀看者稱呼</h3><p class="subtext">僅需簡單稱呼與關係，不需輸入真實姓名。系統分別記錄「開啟」及「自述已看完」。</p><label for="viewer">觀看者稱呼</label><input id="viewer" required maxlength="20" placeholder="例如：王先生、陳小姐" /><label for="relation">與病人的關係</label><select id="relation" required><option value="">請選擇</option><option>父子</option><option>父女</option><option>母子</option><option>母女</option><option>夫妻</option><option>祖孫</option><option>其他家屬</option><option>主要照顧者</option></select><button type="submit" class="primary-btn full">記錄並開啟影片</button><p class="hint">衛教影片連結尚待單位提供。現階段只會示範登記流程。</p></form>
+    <div id="video-after" class="hidden"><h3>已登記觀看</h3><p class="subtext">請先確實觀看衛教影片，再點選下方按鈕。這是觀看者自行確認，並非影片播放完成的自動證明。</p><button id="video-complete" type="button" class="primary-btn full">我已看完影片</button></div>
+  </dialog>
+  <script src="app.js" defer></script>
+</body>
+</html>
